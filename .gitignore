@@ -27,6 +27,7 @@ $RECYCLE.BIN/
 
 # App specific
 
+bower_components/
 node_modules/
 .tmp
 dist
