@@ -5,38 +5,28 @@
 var React = require('react/addons');
 var ResultList = require('./ResultList');
 var Filter = require('./Filter');
-var results=[
-    {
-        id:1,
-        text:"meine 1",
-        price:3.45
-    },
-    {
-        id:2,
-        text:"meine 2",
-        price:45.45
-    },
-    {
-        id:3,
-        text:"meine 3",
-        price:13.45
-    }
-];
+var store = require('./ProductMemoryStore');
+var ProductDispatcher = require('./ProductDispatcher');
 
-var filter = {text:"mein",lprice:0,uprice:100};
+
+var filter = {text: "mein", lprice: 0, uprice: 100};
 
 var ProductFilter = React.createClass({
-    getInitialState: function() {
-        return {results: this.filter(results, filter)};
+    componentDidMount: function() {
+        var me =this;
+        store.on("change", function() {
+            me.setState({"results": store.getProducts()});
+            me.forceUpdate();
+        })
+        ProductDispatcher.dispatch({event:"filter-products",filter:filter});
     },
-    filter: function(results, filter) {
-        var r = results.filter(function(r) {return (filter.text == "" || r.text.match(new RegExp(filter.text))) && r.price<filter.uprice && r.price>=filter.lprice;});
-        return r;
+    getInitialState: function () {
+        return {results: []};
     },
-    filterChanged: function(filter) {
-        this.setState({results:this.filter(results, filter)});
+    filterChanged: function (filter) {
+        ProductDispatcher.dispatch({event:"filter-products",filter:filter});
     },
-    render: function() {
+    render: function () {
         return (
             <p>
                 <Filter defaultFilter={filter} filterChange={this.filterChanged}/>

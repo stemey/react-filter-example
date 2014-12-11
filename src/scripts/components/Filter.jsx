@@ -6,39 +6,47 @@ var React = require('react/addons');
 
 
 var Filter = React.createClass({
-    getInitialState: function() {
-      return {filter:this.props.defaultFilter};
+    getInitialState: function () {
+        return {filter: this.props.defaultFilter};
     },
-    filterChanged: function() {
-        try {
-            var filter = {};
-            filter.uprice = parseFloat(this.state.filter.uprice);
-            filter.lprice = parseFloat(this.state.filter.lprice);
-            filter.text = this.state.filter.text;
-            this.props.filterChange(filter);
-            return true;
-        } catch(e) {
-            return false;
+    parseFloat: function(value) {
+        if (value==="") {
+            return null;
+        } else {
+            return parseFloat(value);
         }
     },
-    onTextChange: function(event) {
-        this.setFilter('text',event.target.value);
+    filterChanged: function () {
+        var filter = {};
+        filter.uprice = this.parseFloat(this.state.filter.uprice);
+        filter.lprice = this.parseFloat(this.state.filter.lprice);
+        filter.text = this.state.filter.text;
+        if (!isNaN(filter.uprice) && !isNaN(filter.lprice)) {
+            this.props.filterChange(filter);
+            return true;
+        } else {
+            return false;
+        }
+
+    },
+    onTextChange: function (event) {
+        this.setFilter('text', event.target.value);
         this.filterChanged();
     },
-    onLpriceChange: function(event) {
-        this.setFilter('lprice',event.target.value);
+    onLpriceChange: function (event) {
+        this.setFilter('lprice', event.target.value);
         this.filterChanged();
     },
-    onUpriceChange: function(event) {
+    onUpriceChange: function (event) {
         this.setFilter('uprice', event.target.value);
         this.filterChanged();
     },
-    setFilter: function(name, value) {
+    setFilter: function (name, value) {
         var newFilter = this.state.filter;
-        newFilter[name]=value;
-        this.setState({filter:newFilter});
+        newFilter[name] = value;
+        this.setState({filter: newFilter});
     },
-    render: function() {
+    render: function () {
         return (
             <div>
                 <input value={this.state.filter.text} onChange={this.onTextChange}/>

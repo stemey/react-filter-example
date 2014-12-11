@@ -10,52 +10,52 @@ var webpack = require('webpack');
 
 module.exports = {
 
-  output: {
-    filename: 'main.js',
-    publicPath: '/assets/'
-  },
+    output: {
+        filename: 'main.js',
+        publicPath: '/assets/'
+    },
 
-  cache: true,
-  debug: true,
-  devtool: false,
-  entry: [
-      'webpack/hot/only-dev-server',
-      './src/scripts/components/main.jsx'
-  ],
+    cache: true,
+    debug: true,
+    devtool: false,
+    entry: [
+        'webpack/hot/only-dev-server',
+        './src/scripts/components/main.jsx'
+    ],
 
-  stats: {
-    colors: true,
-    reasons: true
-  },
+    stats: {
+        colors: true,
+        reasons: true
+    },
 
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
+    },
 
-  module: {
-    preLoaders: [{
-      test: '\\.js$',
-      exclude: 'node_modules',
-      loader: 'jshint'
-    }],
-    loaders: [{
-      test: /\.jsx$/,
-      loader: 'react-hot!jsx-loader?harmony'
-    }, {
-      test: /\.less/,
-      loader: 'style-loader!css-loader!less-loader'
-    }, {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader'
-    }, {
-      test: /\.(png|jpg)$/,
-      loader: 'url-loader?limit=8192'
-    }]
-  },
+    module: {
+        preLoaders: [{
+            test: '\\.js$',
+            exclude: 'node_modules',
+            loader: 'jshint'
+        }],
+        loaders: [{
+            test: /\.jsx$/,
+            loader: 'react-hot!jsx-loader?harmony'
+        }, {
+            test: /\.less/,
+            loader: 'style-loader!css-loader!less-loader'
+        }, {
+            test: /\.css$/,
+            loader: 'style-loader!css-loader'
+        }, {
+            test: /\.(png|jpg)$/,
+            loader: 'url-loader?limit=8192'
+        }]
+    },
 
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ]
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
+    ]
 
 };

@@ -12,11 +12,12 @@ var ListItemWrapper = React.createClass({
 
 var ResultList = React.createClass({
     render: function() {
+        var children = this.props.results.map(function(result) {
+            return <ListItemWrapper key={result.id} data={result}/>;
+        });
         return (
             <ul>
-                {this.props.results.map(function(result) {
-                    return <ListItemWrapper key={result.id} data={result}/>;
-                })}
+                {children}
             </ul>
         );
     }
