@@ -10,9 +10,11 @@
   "mainInput": "main",
   "mainOutput": "main",
   "dependencies": {
-    "react-router": "^0.7.0",
-    "react": "~0.11.2",
-    "flux": "~2.0.1"
+    "react-router": "^0.11.5",
+    "react": "~0.12.1",
+    "flux": "~2.0.1",
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.1"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
